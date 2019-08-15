@@ -197,3 +197,24 @@ def reverse(s):
         return reverse(s[1:] + s[0])
 
 reverse('hello')
+
+# 温度转换
+TempStr = input("请输入带有符号的温度值：")
+if TempStr[-1] in ['F','f']:
+    C = (eval(TempStr[0:-1]) - 32)/1.8
+    print('转换后的温度是{:.2f}C'.format(C))
+elif TempStr[-1] in ['C','c']:
+    F = 1.8*(eval(TempStr[0:-1])) + 32
+    print('转换后的温度是{:.2f}F'.format(F))
+else:
+    print('输入格式错误')
+
+# Hello World的条件输出
+Number = eval(input())
+if Number == 0:
+    print('Hello World')
+elif Number > 0:
+    print('he\nll\no \nwo\nrl\nd')
+else:
+    for i in "Hello World":
+        print(i)
