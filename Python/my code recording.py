@@ -218,3 +218,56 @@ elif Number > 0:
 else:
     for i in "Hello World":
         print(i)
+
+# PythonDraw.py
+import turtle
+turtle.setup(650,350,200,200)
+turtle.penup()
+turtle.fd(-250)
+turtle.pendown()
+turtle.pensize(25)
+turtle.pencolor("purple")
+turtle.seth(-40)
+for i in range(4):
+    turtle.circle(40,80)
+    turtle.circle(-40.80)
+turtle.circle(40,80/2)
+turtle.fd(40)
+turtle.circle(16,180)
+turtle.fd(40 * 2/3)
+turtle.done()
+
+# 绘制八角图形
+import turtle as t
+t.pensize(2)
+for i in range(8):
+	t.fd(150)
+	t.left(135)
+
+# 获得用户输入的一个正整数输入，输出该数字对应的中文字符表示。‪‬‪‬‪‬‪‬‪‬‮‬‪‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‪‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‪‬‭‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‮‬0到9对应的中文字符分别是：零一二三四五六七八九
+char = "零一二三四五六七八九"
+n = eval(input())
+for c in n:
+    print(char[c],end="")
+
+# 温度转换2
+temp = input()
+if temp[0] in ["C"]:
+    F = eval(temp[1:])*1.8 + 32
+    print("F{:.2f}".format(F))
+elif temp[0] in ["F"]:
+    C = (eval(temp[1:]) - 32) / 1.8
+    print("C{:.2f}".format(C))
+else:
+    print('输入错误')
+
+# 美元人民币转换
+temp = input()
+if temp[:3] in ["RMB"]:
+    U = eval(temp[3:]) / 6.78
+    print("USD{:.2f}".format(U))
+elif temp[:3] in ["USD"]:
+    R = eval(temp[3:]) * 6.78
+    print("RMB{:.2f}".format(R))
+else:
+    print()	
