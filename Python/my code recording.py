@@ -334,3 +334,40 @@ elif 28 <= bmi < 30:
 else:
     r1, r2 = "肥胖", "肥胖"
 print("BMI指标为：国际'{0}',国内'{1}'".format(r1,r2))
+
+# 输出四色玫瑰数
+for a in range(10):
+    for b in range(10):
+        for c in range(10):
+            for d in range(10):
+                n = pow(a,4)+pow(b,4)+pow(c,4)+pow(d,4)
+                m = a * 1000 + b * 100 + c * 10 + d
+                if n == m and len(str(m)) == 4:
+                    print(m)
+
+s = ""
+for i in range(1000, 10000):
+    t = str(i)
+    if pow(eval(t[0]),4) + pow(eval(t[1]),4) + pow(eval(t[2]),4) + pow(eval(t[3]),4) == i :
+        print(i)
+
+# 100以内的素数之和
+s = 0
+for i in range(2,100):
+    for n in range(2,i):
+        if(i % n == 0):
+            break
+    else:
+        s += i
+print(s)
+
+def is_prime(n):
+    for i in range(2,n):
+        if n%i == 0:
+            return False
+    return True
+sum = 0
+for i in range(2,100):
+    if is_prime(i):
+        sum += i
+print(sum)
