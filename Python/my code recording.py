@@ -271,3 +271,66 @@ elif temp[:3] in ["USD"]:
     print("RMB{:.2f}".format(R))
 else:
     print()	
+
+# 天天向上的力量
+dayup = pow(1.001,365)
+daydown = pow(0.999,365)
+print("向上:{:.2f},向下:{:.2f}".format(dayup,daydown))
+
+# 天天向上的力量（使用变量）
+dayfactor = 0.005 #百分值变化不用在逐行更改
+dayup = pow(1 + dayfactor,365)
+daydown = pow(1 - dayfactor,365)
+print("向上：{:.2f},向下：{:.2f}".format(dayup,daydown))
+
+# 天天向上工作日的力量
+dayup = 1.0
+dayfactor = 0.01
+for i in range(365):
+    if i % 7 in [6,0]:
+        dayup = dayup * (1 - dayfactor)
+    else:
+        dayup = dayup * (1 + dayfactor)
+print("工作日的力量：{:.2f}".format(dayup))
+
+# 天天向上A君每天进步1%，B君做五休二（休息退步1%），B君工作日要多努力
+def dayUP(df):
+    dayup = 1
+    for i in range(365):
+        if i % 7 in [6,0]:
+            dayup = dayup * (1 - 0.01)
+        else:
+            dayup = dayup * (1 + df)
+    return dayup
+dayfactor = 0.01
+while dayUP(dayfactor) < 37.78:
+    dayfactor += 0.001
+print("工作日的努力参数是：{:.3f}",format(dayfactor))
+
+# 输入数字输出相应星期
+weekstr = "一二三四五六七"
+weeknumber = eval(input("请输入星期数字（1-7）："))
+print("星期" + weekstr[weeknumber - 1])
+
+a = eval(input())
+n = pow(a,0.5)
+print('{:+>30.3f}'.format(n))
+
+# 身体质量指数BMI
+height,weight = eval(input("请输入身高（米）和体重（公斤）[用逗号隔开]："))
+bmi = weight / pow(height,2)
+print("您的BMI值为：{:.2f}".format(bmi))
+r1,r2 = "",""
+if bmi < 18.5:
+    r1,r2 = "偏瘦","偏瘦"
+elif 18.5 <= bmi < 24:
+    r1, r2 = "正常", "正常"
+elif 24 <= bmi < 25:
+    r1, r2 = "正常", "偏胖"
+elif 25 <= bmi < 28:
+    r1, r2 = "偏胖", "偏胖"
+elif 28 <= bmi < 30:
+    r1, r2 = "偏胖", "肥胖"
+else:
+    r1, r2 = "肥胖", "肥胖"
+print("BMI指标为：国际'{0}',国内'{1}'".format(r1,r2))
