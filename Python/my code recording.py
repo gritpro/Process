@@ -466,4 +466,167 @@ def f(n):
         return 1
     else:
         return f(n-1) + f(n-2)
+# 随机密码生成
+import random
+def genpwd(length):
+    a = pow(10, length - 1)
+    b = pow(10, length) - 1
+    return "{}".format(random.randint(a, b))
+length = eval(input())
+random.seed(17)
+for i in range(3):
+    print(genpwd(length))
 
+# 连续质数计算
+def prime(m):
+    for i in range(2,m):
+        if m % i == 0:
+            return False
+    return True
+n = eval(input())
+n_ = int(n)
+n_ = n_+1 if n_ < n else n_
+count = 5
+while count > 0:
+    if prime(n_):
+        if count > 1:
+            print(n_, end=",")
+        else:
+            print(n_, end="")
+        count -= 1
+    n_ += 1
+
+# 基础统计值计算
+def getnum():
+    nums = []
+    inumstr = input("请输入数字（回车退出）：")
+    while inumstr != "":
+        nums.append(eval(inumstr))
+        inumstr = input("请输入数字（回车退出）：")
+    return nums
+
+def mean(numbers):
+    s = 0.0
+    for num in numbers:
+        s = s + num
+    return s / len(numbers)
+
+def dev(numbers,mean):
+    sdev = 0.0
+    for num in numbers:
+        sdev = sdev + (num - mean)**2
+    return pow(sdev / (len(numbers)-1),0.5)
+
+def median(numbers):
+    sorted(numbers)
+    size = len(numbers)
+    if size % 2 == 0:
+        med = (numbers[size//2-1] + numbers[size//2])/2
+    else:
+        med = numbers[size//2]
+    return med
+
+n = getnum()
+m = mean(n)
+print("平均值:{},方差:{:.2},中位数:{}.".format(m,dev(n,m),median(n)))
+
+# 数字不同数之和
+ls = input()
+s = set(ls)
+n = 0
+for i in s:
+    n += eval(i)
+print(n)
+
+#词频统计
+s = '''双儿 洪七公 赵敏 赵敏 逍遥子 鳌拜 殷天正 金轮法王 乔峰 杨过 洪七公 郭靖 
+       杨逍 鳌拜 殷天正 段誉 杨逍 慕容复 阿紫 慕容复 郭芙 乔峰 令狐冲 郭芙 
+       金轮法王 小龙女 杨过 慕容复 梅超风 李莫愁 洪七公 张无忌 梅超风 杨逍 
+       鳌拜 岳不群 黄药师 黄蓉 段誉 金轮法王 忽必烈 忽必烈 张三丰 乔峰 乔峰 
+       阿紫 乔峰 金轮法王 袁冠南 张无忌 郭襄 黄蓉 李莫愁 赵敏 赵敏 郭芙 张三丰 
+       乔峰 赵敏 梅超风 双儿 鳌拜 陈家洛 袁冠南 郭芙 郭芙 杨逍 赵敏 金轮法王 
+       忽必烈 慕容复 张三丰 赵敏 杨逍 令狐冲 黄药师 袁冠南 杨逍 完颜洪烈 殷天正 
+       李莫愁 阿紫 逍遥子 乔峰 逍遥子 完颜洪烈 郭芙 杨逍 张无忌 杨过 慕容复 
+       逍遥子 虚竹 双儿 乔峰 郭芙 黄蓉 李莫愁 陈家洛 杨过 忽必烈 鳌拜 王语嫣 
+       洪七公 韦小宝 阿朱 梅超风 段誉 岳灵珊 完颜洪烈 乔峰 段誉 杨过 杨过 慕容复 
+       黄蓉 杨过 阿紫 杨逍 张三丰 张三丰 赵敏 张三丰 杨逍 黄蓉 金轮法王 郭襄 
+       张三丰 令狐冲 赵敏 郭芙 韦小宝 黄药师 阿紫 韦小宝 金轮法王 杨逍 令狐冲 阿紫 
+       洪七公 袁冠南 双儿 郭靖 鳌拜 谢逊 阿紫 郭襄 梅超风 张无忌 段誉 忽必烈 
+       完颜洪烈 双儿 逍遥子 谢逊 完颜洪烈 殷天正 金轮法王 张三丰 双儿 郭襄 阿朱 
+       郭襄 双儿 李莫愁 郭襄 忽必烈 金轮法王 张无忌 鳌拜 忽必烈 郭襄 令狐冲 
+       谢逊 梅超风 殷天正 段誉 袁冠南 张三丰 王语嫣 阿紫 谢逊 杨过 郭靖 黄蓉 
+       双儿 灭绝师太 段誉 张无忌 陈家洛 黄蓉 鳌拜 黄药师 逍遥子 忽必烈 赵敏 
+       逍遥子 完颜洪烈 金轮法王 双儿 鳌拜 洪七公 郭芙 郭襄 赵敏'''
+ls = s.split()
+d = {}
+for i in ls:
+    d[i] = d.get(i,1) + 1 #是指有i时返回其值，默认是0，+1能够累计次数；没有i时则返回0
+name,nums = "",0
+for k in d:
+    if d[k] > nums:
+        name,nums = k,d[k]
+print(name)
+
+# 自动轨迹绘制
+import turtle as t
+t.title("自动轨迹绘制")
+t.setup(800,600,0,0)
+t.pencolor("red")
+t.pensize(5)
+#数据读取
+detals = []
+f = open("data.txt")
+for line in f:
+    line = line.replace("\n","")
+    detals.append(list(map(eval,line.spilt(","))))
+f.close()
+#自动绘制
+for i in range(len(detals)):
+    t.pencolor(detals[i][3],detals[i][4],detals[i][5])
+    t.fd(detals[i][0])
+    if detals[i][1]:
+        t.right(detals[1][2])
+    else:
+        t.left(detals[i][2])
+
+# 不规则图形词云
+import jieba
+import wordcloud
+import  scipy.misc import imread  # 自定义词云形状
+mask = imread("chinamap.jpg")    # 导入词云形状图，需是白底
+excludes = {}
+f = open("新时代中国特色社会主义.txt","r",encoding = "utf-8")
+t = f.read()
+f.close()
+ls = jieba.lcut(t)
+txt = "".join(ls)
+w = wordcloud.WordCloud(width = 1000,height = 700,\
+                        background_color = "white",
+                        font_path = "msyh.ttc",mask = mask
+                        )
+w.generate(txt)
+w.to_file("grwordcloudm.png")
+
+# 文本的平均列数
+f = open("latex.log")
+s,c = 0,0
+for line in f:
+    line = line.strip("\n")
+    if line == "":
+        continue
+    s += len(line)
+    c += 1
+print(round(s/c))
+
+# CSV格式清洗与转换
+f = open("data.csv")
+ls = f.readlines()
+ls = ls[::-1]
+lt = []
+for item in ls:
+    item = item.strip("\n")
+    item = item.replace(" ", "")
+    lt = item.split(",")
+    lt = lt[::-1]
+    print(";".join(lt))
+f.close()
