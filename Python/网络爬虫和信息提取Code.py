@@ -93,3 +93,91 @@ try:
     print(t.text[-500:])
 except:
     print("爬取失败")
+    
+# beautiful soup库
+import requests
+r = requests.get("http://python123.io/ws/demo.html")
+demo = r.text
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(demo,'html.parser')
+
+#下行遍历
+soup.head
+soup.head.contents
+soup.body.contents
+len(soup.body.contents)
+soup.body.contents[2]
+for child in soup.body.children:
+    print(child)  #遍历儿子节点
+
+# 上行遍历
+import requests
+r = requests.get("http://python123.io/ws/demo.html")
+demo = r.text
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(demo,'html.parser')
+for parent in soup.a.parents:
+    if parent is None:
+        print(parent)
+    else:
+        print(parent.name)
+
+soup.title.parent
+soup.html.parent
+
+#平行遍历
+soup = BeautifulSoup(demo,'html.parser')
+soup.a.next_sibling
+soup.a.next_sibling.next_sibling
+
+soup = BeautifulSoup(demo,'html.parser')
+for sibling in soup.a.next_siblings:
+    if parent is None:
+        print(sibling)
+
+for sibling in soup.a.previous_siblings:
+    if parent is None:
+        print(sibling)
+
+# 信息提取的一般方法
+import requests
+r = requests.get("http://python123.io/ws/demo.html")
+demo = r.text
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(demo,"html.parser")
+for link in soup.find_all('a'):
+    print(link.get('href'))
+
+# 中国大学排名爬虫
+import requests
+from bs4 import BeautifulSoup
+import bs4
+def gethtmltext(url):
+    try:
+        r = requests.get(url,timeout = 30)
+        r.raise_for_status()
+        r.encoding = r.apparent_encoding
+        return r.text
+    except:
+        return ""
+
+def fillunivlist(ulist,html):
+    soup = BeautifulSoup(html,"html.parser")
+    for tr in soup.find('tbody').children:
+        if isinstance(tr,bs4.element.Tag):
+            tds = tr('td')
+            ulist.append([tds[0].string,tds[1].string,tds[2].string])
+
+def printunivlist(ulist,num):
+    print("{:^10}\t{:^6}\t{:^10}".format("排名","学校名称","总分"))
+    for i in range(num):
+        u = ulist[i]
+        print("{:^10}\t{:^6}\t{:^10}".format(u[0],u[1],u[2]))
+
+def main():
+    uinfo = []
+    url = "https://www.zuihaodaxue.cn/zuihaodaxuepaiming2016.html"
+    html = gethtmltext()
+    fillunivlist(uinfo,html)
+    printunivlist(uinfo,20) #前20
+main()
